@@ -1,21 +1,14 @@
 import { useState } from 'react'
+import {ItemListContainer} from "./components/ItemListContainer/ItemListContainer"
+import {NavBar} from "./components/NavBar/NavBar"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Titulo = ()=>{
-  return(
-    <div>
-        <h1>Pequeña Alpaca</h1>
-        <h2>Baby Shop</h2>
-    </div>
-  )
-}
-
-function App() {
-  console.log('hola')
+function App(){
   return (
     <>
-      <Titulo />
-    </>
+      <NavBar />
+      <ItemListContainer />
+    </>  
   )
 }
-
-export default App
+export default App 

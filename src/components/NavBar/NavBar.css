@@ -1,0 +1,31 @@
+img{
+    width: 40%;
+}
+.nav-bar{
+    width: 100%;
+    background-color: #a4a5d6;
+    display: flex ;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around ;
+    align-items: center;
+}
+
+.nav-items{
+    padding: 30px;
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+}
+.nav-bar a{
+    text-decoration: none;
+    padding: 10px;
+    color: #323135;
+    font-size: 1.5em;
+}
+.nav-items a:hover{
+    font-weight: bolder ;
+    text-decoration:underline;
+}
