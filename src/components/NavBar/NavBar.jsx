@@ -17,7 +17,7 @@ export const NavBar =() =>{
             </div>
             <div>
                 <a href="#">Iniciar Sesion</a>
-                <CartWidget />
+                <NavLink className={({isActive})=> isActive ? 'btn btn-outline-light' : 'btn' } to='/cart'><CartWidget /></NavLink>
             </div>
         </div>
     )
