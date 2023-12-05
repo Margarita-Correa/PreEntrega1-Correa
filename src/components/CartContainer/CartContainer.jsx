@@ -15,7 +15,7 @@ export const CartContainer =() =>{
                                             <br />Cantidad: {producto.cantidad} 
                                             <br /> Precio Unitario: $ {producto.price}
                                             <br /> Subtotal: $ {producto.subtotal}
-                                            <button className="btn btn-danger" onClick={eliminarItem}> X </button>
+                                            <button className="btn btn-danger"> X </button>
                                           </div>)}
             <hr />
             </div>
