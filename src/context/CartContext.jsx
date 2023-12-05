@@ -42,6 +42,13 @@ export const  CartContextProvider = ({children}) =>{
     const eliminarItem = (producto) =>{
         //setCartList() donde no solo se elimine el producto del array sino que el jsx entero del producto
         //se tiene que actualizar la cantidad total y el precio total
+        const productoAEliminar = cartList.filter(productoCartList => productoCartList.id === producto.id)
+        cartList.splice(producto.id,1)
+        setCartList([cartList])
+
+        setCantTotal(cantTotal - productoAEliminar.cantidad)
+
+        setPrecioTotal(precioTotal - (productoAEliminar.price * productoAEliminar.cantidad))
     }
 
     return (

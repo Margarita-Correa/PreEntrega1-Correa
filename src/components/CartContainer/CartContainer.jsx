@@ -30,7 +30,7 @@ export const CartContainer =() =>{
     return(
         <>
             <div>
-            <h1>No tiene productos en su carrito</h1>
+            <h1>No tienes productos en tu carrito</h1>
             <Link to='/'><button className='btn btn-outline-dark w-100'>Ver productos</button></Link>    
             </div>
         

@@ -2,11 +2,14 @@ import { useState } from "react"
 import { useCartContext } from "../../../context/CartContext"
 import { ItemCounter } from "../../ItemCounter/ItemCounter"
 import { Link } from "react-router-dom"
+import { Loading } from "../../Loader/Loading"
+import { useLoadingContext } from "../../../context/LoandingContext"
 
 export const ItemDetail =({producto}) =>{
     const { cartList, agregarProducto, productoRepetido } = useCartContext()
     const [isCounter, setIsCounter] = useState(true)
-
+    const {loading, setLoading} = useLoadingContext()
+    
     const onAdd = (cantidad)=>{
     if(cartList.filter(productoCartList => productoCartList.id === producto.id).length !== 0 ){
         productoRepetido(producto, cantidad)
@@ -17,7 +20,10 @@ export const ItemDetail =({producto}) =>{
     }
 
     return (
-        <>
+        <>{
+            loading ? 
+              <Loading />
+            :
             <div className="row">
                 <div className="col-12 text-center pt-4">
                     <h1>Detalle del producto</h1>
@@ -44,8 +50,8 @@ export const ItemDetail =({producto}) =>{
                             </>
                     }
                 </div>
-
             </div>
+        }
         </>
     )
 }
