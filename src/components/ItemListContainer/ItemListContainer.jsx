@@ -17,20 +17,21 @@ const {loading, setLoading} = useLoadingContext()
       const dbFirestore = getFirestore()
       const queryCollection= collection(dbFirestore, 'products')
 
+      const getProducts= (queryType) => {
+        getDocs(queryType)
+        .then(res => setProducts(res.docs.map(product => {id: product.id, product.data()})))
+        .catch(err => console.log(err))
+        .finally(() => setLoading(false))
+      }
+
     if(cid){
       const queryFilter = query(
         queryCollection, 
         where('category', '==', cid)
         )
-      getDocs(queryFilter)
-      .then(res => setProducts(res.docs.map(product => {id: product.id, product.data()})))
-      .catch(err => console.log(err))
-      .finally(() => setLoading(false))
+      getProducts(queryFilter)
     }else{
-      getDocs(queryCollection)
-      .then(res => setProducts(res.docs.map(product => {id: product.id, product.data()} )))
-      .catch(err => console.log(err))
-      .finally(() => setLoading(false))
+      getProducts(queryCollection)
     }
 },[cid])
 
