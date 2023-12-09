@@ -2,45 +2,35 @@ import { useState } from "react"
 import { useCartContext } from "../../../context/CartContext"
 import { ItemCounter } from "../../ItemCounter/ItemCounter"
 import { Link } from "react-router-dom"
-import { Loading } from "../../Loader/Loading"
-import { useLoadingContext } from "../../../context/LoandingContext"
 
-export const ItemDetail =({producto}) =>{
-    const { cartList, agregarProducto, productoRepetido } = useCartContext()
+export const ItemDetail =({product}) =>{
+    const {addProduct} = useCartContext()
     const [isCounter, setIsCounter] = useState(true)
-    const {loading, setLoading} = useLoadingContext()
     
-    const onAdd = (cantidad)=>{
-    if(cartList.filter(productoCartList => productoCartList.id === producto.id).length !== 0 ){
-        productoRepetido(producto, cantidad)
-        }else{
-        agregarProducto ({...producto, cantidad, subtotal: producto.price * cantidad})
-        }
+    const onAdd = (quantity)=>{
+        addProduct ({...product, quantity, subtotal: product.price * quantity})
         setIsCounter(false)
     }
 
     return (
-        <>{
-            loading ? 
-              <Loading />
-            :
+        <>
             <div className="row">
                 <div className="col-12 text-center pt-4">
                     <h1>Detalle del producto</h1>
                 </div>
                 <hr/>
                 <div className="col-6 text-center">
-                    <h2>{producto.name}</h2>
-                    <img src={producto.imgUrl} alt={producto.nombre} className="img-fluid w-50"/>
+                    <h2>{product.name}</h2>
+                    <img src={product.imgUrl} alt={product.name} className="img-fluid w-50"/>
                 </div>
                 <div className="col-6 d-flex flex-column justify-content-center">
-                    <h4>Descripción: {producto.description}</h4>
-                    <h4>Precio: ${producto.price}</h4>
-                    <h4>Cantidad disponible: {producto.stock}</h4>
+                    <h4>Descripción: {product.description}</h4>
+                    <h4>Precio: ${product.price}</h4>
+                    <h4>Cantidad disponible: {product.stock}</h4>
                     <br/>
                     {
                         isCounter ?
-                            <ItemCounter initial={1} stock={producto.stock} onAdd ={onAdd}/>
+                            <ItemCounter initial={1} stock={product.stock} onAdd ={onAdd}/>
                         :
                             <>
                             <div>
@@ -51,7 +41,6 @@ export const ItemDetail =({producto}) =>{
                     }
                 </div>
             </div>
-        }
         </>
     )
 }

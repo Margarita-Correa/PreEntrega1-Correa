@@ -1,28 +1,35 @@
 import {useEffect,useState} from "react"
 import { Titulo } from "../Titulo/Titulo"
-import {mFetch} from "../../helpers/mFetch"
 import { ItemList } from "./ItemList/ItemList"
 import { useParams } from "react-router-dom"
 import { useLoadingContext } from "../../context/LoandingContext"
 import { Loading } from "../Loader/Loading"
+import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
 
 
 export const ItemListContainer= () => {
-const [productos,setProductos] = useState([])
+const[products, setProducts] = useState([])
 const {cid} = useParams()
 const {loading, setLoading} = useLoadingContext()
 
-  //llamada a mi promesa mock de una api
+//Acceso a la colección
   useEffect(()=>{
+      const dbFirestore = getFirestore()
+      const queryCollection= collection(dbFirestore, 'products')
+
     if(cid){
-      mFetch()
-      .then(result => setProductos(result.filter(producto => producto.category === cid)))
-      .catch(err=>console.log(err)) 
+      const queryFilter = query(
+        queryCollection, 
+        where('category', '==', cid)
+        )
+      getDocs(queryFilter)
+      .then(res => setProducts(res.docs.map(product => {id: product.id, product.data()})))
+      .catch(err => console.log(err))
       .finally(() => setLoading(false))
     }else{
-      mFetch()
-      .then(result => setProductos(result))
-      .catch(err=>console.log(err))
+      getDocs(queryCollection)
+      .then(res => setProducts(res.docs.map(product => {id: product.id, product.data()} )))
+      .catch(err => console.log(err))
       .finally(() => setLoading(false))
     }
 },[cid])
@@ -35,7 +42,7 @@ const {loading, setLoading} = useLoadingContext()
           <Loading />
           :
           <div className='d-flex flex-wrap flex-row'>
-          <ItemList  productos={productos}/>
+          <ItemList  products={products}/>
           </div>
       }
     </>

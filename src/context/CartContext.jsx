@@ -1,5 +1,4 @@
 import { createContext, useContext, useState }  from "react"
-import { CartContainer } from "../components/CartContainer/CartContainer"
 
 const CartContext = createContext([])
 
@@ -7,59 +6,46 @@ export const useCartContext = () => useContext(CartContext)
 
 export const  CartContextProvider = ({children}) =>{
     const [cartList, setCartList] = useState([])
-    const [precioTotal,setPrecioTotal] = useState(0)
-    const [cantTotal, setCantTotal] = useState(0)
 
-    const agregarProducto = (producto) =>{
+    const repeatedProduct = (pid)=> cartList.findIndex_(product => product.id === pid)
+
+    const addProduct = (product) =>{
+        const indexProduct = repeatedProduct (product.id)
+
+        if(indexProduct !== -1){
+            cartList[indexProduct].quantity += product.quantity
+            setCartList([...cartList])
+        }else{
             setCartList([
-            ...cartList,
-            producto
-        ])
-        //cantidad total de productos
-        setCantTotal(cantTotal + producto.cantidad)
+                ...cartList,
+                product   
+           ])
+        }
+    }
+    //Cantidad total de productos
+    const totalQuantity =()=> cartList.reduce((totalProduct, product) => totalProduct += product.quantity , 0)
 
-        //precio total de productos
-        setPrecioTotal(precioTotal + producto.subtotal)
+    //Precio total del carrito
+    const totalPrice = ()=> cartList.reduce((totalPrecio,product)=> totalPrecio += (product.price * product.quantity) , 0)
+    
+    //Eliminar un producto por id
+    const removeItem = (pid) =>{
+        setCartList(cartList.filter(product => product.id !== pid))
+    }
+    //Vaciar carrito de compras
+    const emptyCart = () =>{
+        setCartList([])
     }
 
-    const productoRepetido = (producto, cantidad) =>{
-            cartList[producto.id].cantidad = cartList[producto.id].cantidad +  cantidad
-            cartList[producto.id].subtotal = cartList[producto.id].subtotal +  producto.price * cantidad
-        //cantidad total de productos
-        setCantTotal(cantTotal + cantidad)
-
-        //precio total de productos
-        setPrecioTotal(precioTotal + cartList[producto.id].price * cantidad)
-    }
-
-    const vaciarCarrito = () =>{
-        setCartList([]),
-        setCantTotal(0),
-        setPrecioTotal(0)
-    }
-
-    //eliminar un producto por id
-    const eliminarItem = (producto) =>{
-        //setCartList() donde no solo se elimine el producto del array sino que el jsx entero del producto
-        //se tiene que actualizar la cantidad total y el precio total
-        const productoAEliminar = cartList.filter(productoCartList => productoCartList.id === producto.id)
-        cartList.splice(producto.id,1)
-        setCartList([cartList])
-
-        setCantTotal(cantTotal - productoAEliminar.cantidad)
-
-        setPrecioTotal(precioTotal - (productoAEliminar.price * productoAEliminar.cantidad))
-    }
 
     return (
         <CartContext.Provider value = {{
             cartList,
-            cantTotal,
-            precioTotal,
-            agregarProducto,
-            productoRepetido,
-            vaciarCarrito,
-            eliminarItem
+            totalQuantity,
+            totalPrice,
+            addProduct,
+            emptyCart,
+            removeItem,
         }}>
             {children}            
         </CartContext.Provider>

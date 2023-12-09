@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react"
-import { mFetch } from "../../helpers/mFetch"
 import { useParams } from "react-router-dom"
 import { ItemDetail } from "./ItemDetail/ItemDetail"
 import { useLoadingContext } from "../../context/LoandingContext"
 import { Loading } from "../Loader/Loading"
+import {doc, getDoc, getFirestore} from 'firebase/firestore'
 
 export const ItemDetailContainer= ()=> {
-  const [producto, setproduct] = useState({})
+  const {product, setProduct} = useState({})
   const {pid} = useParams ()
   const {loading, setLoading} = useLoadingContext()
 
+  //Acceso al documento 
   useEffect(()=>{
-    mFetch(pid)
-      .then(res => setproduct(res))
-      .catch(err => console.log('Error: ', err))
-      .finally(()=> setLoading(false))
-  },[])
+    const dbFirestore = getFirestore()
+    const queryDoc = doc(dbFirestore, 'products', pid)
+
+    getDoc(queryDoc)
+    .then(res => setProduct({id: res.id, ...res.data()}))
+    .catch(err => console.log(err))
+    .finally(()=> setLoading(false))
+  }, [])
 
     return (
       <>
@@ -23,7 +27,7 @@ export const ItemDetailContainer= ()=> {
       loading ?
         <Loading />
       :
-        <ItemDetail producto ={producto} />
+        <ItemDetail product ={product} />
       }
       </>
     )

@@ -1,10 +1,10 @@
 import { Item } from "../Item/Item"
 
-export const ItemList = ({productos})=>{
+export const ItemList = ({products})=>{
     return (
         <>
         <div className="d-flex flex-wrap flex-row justify-content-center">
-            {productos.map(producto => <Item producto={producto} />)}
+            {products.map(product => <Item product={product} />)}
         </div>
         </>
     )
