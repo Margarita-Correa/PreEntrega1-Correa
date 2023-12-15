@@ -37,7 +37,6 @@ export const  CartContextProvider = ({children}) =>{
         setCartList([])
     }
 
-
     return (
         <CartContext.Provider value = {{
             cartList,

@@ -14,7 +14,7 @@ export const NavBar =() =>{
     const queryCollectionCategory = collection(dbCategory, 'category')
 
     getDocs(queryCollectionCategory)
-    .then(res => setCategory(res.docs.map(category => {id: category.id, category.data()})))
+    .then(res => setCategory(res.docs.map(category => ({id: category.id , ...category.data() }) )))
     .catch(err => console.log(err))
   }, [])
 

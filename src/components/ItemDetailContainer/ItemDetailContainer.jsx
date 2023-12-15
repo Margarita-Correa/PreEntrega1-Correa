@@ -16,11 +16,10 @@ export const ItemDetailContainer= ()=> {
     const queryDoc = doc(dbFirestore, 'products', pid)
 
     getDoc(queryDoc)
-    .then(res => setProduct({id: res.id, ...res.data()}))
+    .then(res => setProduct ({id: res.id, ...res.data()} ))
     .catch(err => console.log(err))
     .finally(()=> setLoading(false))
   }, [])
-
     return (
       <>
       {

@@ -21,8 +21,6 @@ export const Form =()=>{
         const db = getFirestore()
         const orderCollection = collection(db, 'orders')
 
-
-    //Aca faltan las Validaciones 
         addDoc(orderCollection, order)
         .then(res => setIsId(res.id))
         .catch(err => console.log(err))

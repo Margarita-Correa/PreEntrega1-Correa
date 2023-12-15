@@ -19,11 +19,10 @@ const {loading, setLoading} = useLoadingContext()
 
       const getProducts= (queryType) => {
         getDocs(queryType)
-        .then(res => setProducts(res.docs.map(product => {id: product.id, product.data()})))
+        .then(resp => setProducts(resp.docs.map(product => ({id: product.id, ...product.data() }) )))
         .catch(err => console.log(err))
         .finally(() => setLoading(false))
       }
-
     if(cid){
       const queryFilter = query(
         queryCollection, 
