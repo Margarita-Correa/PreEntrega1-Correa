@@ -17,9 +17,11 @@ export const ItemDetailContainer= ()=> {
 
     getDoc(queryDoc)
     .then(res => setProduct ({id: res.id, ...res.data()} ))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err)) 
     .finally(()=> setLoading(false))
   }, [])
+
+
     return (
       <>
       {

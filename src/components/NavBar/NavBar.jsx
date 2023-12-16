@@ -25,7 +25,7 @@ export const NavBar =() =>{
             </NavLink>
             <div className="nav-items">
                 <NavLink className={({isActive})=> isActive ? 'btn btn-outline-light' : 'btn' } to='/'>Inicio</NavLink>
-                {category.map(category => <NavLink key ={category.id} className={({isActive})=> isActive ? 'btn btn-outline-light' : 'btn' } to={`/categoria/${category.path}`}>{}</NavLink>)}
+                {category.map(category => <NavLink key ={category.id} className={({isActive})=> isActive ? 'btn btn-outline-light' : 'btn' } to={`/categoria/${category.path}`}>{category.name}</NavLink>)}
             </div>
             <div>
                 <a href="#">Iniciar Sesion</a>
