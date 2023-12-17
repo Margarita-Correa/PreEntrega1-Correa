@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useCartContext } from "../../../context/CartContext"
 import { addDoc, collection, getFirestore } from "firebase/firestore"
+import './Form.css'
 
 export const Form =()=>{
     const {cartList, totalPrice, emptyCart} = useCartContext()
@@ -75,7 +76,7 @@ export const Form =()=>{
                     value={formData.repeatEmail}
                     onChange={handleOnChange}
                 />
-                <br /><button className="btn btn-success m-2" >Comprar</button>
+                <br /><button className="btn btn-success m-2">Comprar</button>
             </form>
         </>
     )

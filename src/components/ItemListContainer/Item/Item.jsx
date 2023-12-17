@@ -5,7 +5,7 @@ export const Item = ({product}) =>{
     <>
         <div key={product.id} className='card w-25 m-5'>
             <div className='card-body'> 
-                <h6>{product.name}</h6>
+                <h6>{product.title}</h6>
                 <img src={product.imgUrl} className="w-100" alt='imagen'/>
                 <p>Precio: ${product.price}</p>
                 <p>Cantidad Disponible: {product.stock}</p>

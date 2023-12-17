@@ -7,7 +7,7 @@ export const useCartContext = () => useContext(CartContext)
 export const  CartContextProvider = ({children}) =>{
     const [cartList, setCartList] = useState([])
 
-    const repeatedProduct = (pid)=> cartList.findIndex_(product => product.id === pid)
+    const repeatedProduct = (pid)=> cartList.findIndex(product => product.id === pid)
 
     const addProduct = (product) =>{
         const indexProduct = repeatedProduct (product.id)
@@ -23,10 +23,10 @@ export const  CartContextProvider = ({children}) =>{
         }
     }
     //Cantidad total de productos
-    const totalQuantity =()=> cartList.reduce((totalProduct, product) => totalProduct += product.quantity , 0)
+    const totalQuantity =()=> cartList.reduce((totalProduct, product) => {totalProduct = totalProduct + product.quantity} , 0)
 
     //Precio total del carrito
-    const totalPrice = ()=> cartList.reduce((totalPrecio,product)=> totalPrecio += (product.price * product.quantity) , 0)
+    const totalPrice = ()=> cartList.reduce((total,product)=> {total = total + product.price * product.quantity} , 0)
     
     //Eliminar un producto por id
     const removeItem = (pid) =>{

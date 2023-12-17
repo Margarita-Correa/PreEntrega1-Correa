@@ -25,10 +25,10 @@ export const NavBar =() =>{
             </NavLink>
             <div className="nav-items">
                 <NavLink className={({isActive})=> isActive ? 'btn btn-outline-light' : 'btn' } to='/'>Inicio</NavLink>
-                {category.map(category => <NavLink key ={category.id} className={({isActive})=> isActive ? 'btn btn-outline-light' : 'btn' } to={`/categoria/${category.path}`}>{category.name}</NavLink>)}
+                {category.map(category => <NavLink key ={category.id} className={({isActive})=> isActive ? 'btn btn-outline-light' : 'btn' } to={`/categoria/${category.path}`}>{category.title}</NavLink>)}
             </div>
             <div>
-                <a href="#">Iniciar Sesion</a>
+                <NavLink className={({isActive})=> isActive ? 'btn btn-outline-light' : 'btn' } to='/login'></NavLink>
                 <NavLink className={({isActive})=> isActive ? 'btn btn-outline-light' : 'btn' } to='/cart'><CartWidget /></NavLink>
             </div>
         </div>

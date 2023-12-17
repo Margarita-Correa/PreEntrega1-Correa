@@ -20,8 +20,8 @@ export const ItemDetail =({product}) =>{
                 </div>
                 <hr/>
                 <div className="col-6 text-center">
-                    <h2>{product.name}</h2>
-                    <img src={product.imgUrl} alt={product.name} className="img-fluid w-50"/>
+                    <h2>{product.title}</h2>
+                    <img src={product.imgUrl} alt={product.title} className="img-fluid w-50"/>
                 </div>
                 <div className="col-6 d-flex flex-column justify-content-center">
                     <h4>Descripción: {product.description}</h4>
