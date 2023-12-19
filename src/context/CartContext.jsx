@@ -14,6 +14,7 @@ export const  CartContextProvider = ({children}) =>{
 
         if(indexProduct !== -1){
             cartList[indexProduct].quantity += product.quantity
+            cartList[indexProduct].subtotal += product.price
             return(        
             setCartList([...cartList]))
         }else{
