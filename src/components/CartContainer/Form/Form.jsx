@@ -48,21 +48,21 @@ export const Form =()=>{
                 {isId !== '' && <label>La orden de compra {isId} se ha generado exitosamente.</label>}
                 <form onSubmit={handleOrder}>
                 <label>Para terminar la compra complete con sus datos: </label><br />
-                <label>Ingrese su nombre: </label><br />
+                <label>Nombre Completo: </label><br />
                 <input 
                     type="text"
                     name="name"
                     value= {formData.name}
                     onChange={handleOnChange}
                 />
-                <br /><label>Ingrese su numero de telefono: </label><br />
+                <br /><label>Numero de telefono: </label><br />
                 <input 
                     type="text"
                     name="phone"
                     value= {formData.phone}
                     onChange={handleOnChange}
                 />
-                <br /><label>Ingrese su email: </label><br />
+                <br /><label>Email: </label><br />
                 <input 
                     type="text"
                     name="email"
