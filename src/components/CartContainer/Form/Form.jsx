@@ -14,9 +14,10 @@ export const Form =()=>{
     })
 
     const handleOrder = async (evt) =>{
+        evt.preventDefault()
         const order = {}
         order.buyer = formData
-        order.items = cartList.map(({id, name, price})=> ({ id, name, price}))
+        order.items = cartList.map(({id, title, price})=> ({ id, title, price}))
         order.total = totalPrice()
 
         const db = getFirestore()
@@ -32,7 +33,6 @@ export const Form =()=>{
             email:'',
             repeatEmail:''
         })
-        emptyCart()
         })
     }
 
@@ -42,10 +42,12 @@ export const Form =()=>{
         [evt.target.name]: evt.target.value
        }) 
     }
-
-    return(
-        <>
-                {isId !== '' && <label>La orden de compra {isId} se ha generado exitosamente.</label>}
+    
+        return(
+            <>
+                <div className="text-center ">
+                {isId !== '' && <label>La orden de compra <strong>{isId}</strong> se ha generado exitosamente.</label>}
+                </div>            
                 <form onSubmit={handleOrder}>
                 <label>Para terminar la compra complete con sus datos: </label><br />
                 <label>Nombre Completo: </label><br />
@@ -79,5 +81,5 @@ export const Form =()=>{
                 <br /><button className="btn btn-success m-2">Comprar</button>
             </form>
         </>
-    )
-}
+    )}
+
